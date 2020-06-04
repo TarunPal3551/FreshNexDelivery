@@ -469,26 +469,8 @@
 
             </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/colorPrimary"
-
-                android:backgroundTint="@color/colorPrimary"
-                android:src="@drawable/whatsapp"
-                android:tint="@android:color/white"
-                app:tint="@android:color/white"
-                app:backgroundTint="@color/colorPrimary">
-
-            </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 
 </FrameLayout>

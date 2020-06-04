@@ -10,18 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
-public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Context mContext;
 
-    public PendingAdapter(Context mContext) {
+    public ProductAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.pending_items, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.custome_sumrry, parent, false);
 
         return new ViewHolder(view,viewType);
     }
