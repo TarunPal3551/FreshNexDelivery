@@ -3,16 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeliveredFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DeliveredFragment"
+    android:background="@color/colorGrey0">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimary"
+            app:title="Delivered Orders"
+            android:id="@+id/toolbar"
+            app:menu="@menu/menu_toolbar"
+
+            app:titleTextColor="@android:color/white">
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/delivered_items">
+            android:layout_below="@id/toolbar"
+            tools:listitem="@layout/delivered_items"
+            android:id="@+id/deliveredRecyclerView">
 
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>

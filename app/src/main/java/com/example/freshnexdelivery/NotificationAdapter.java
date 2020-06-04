@@ -8,21 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.vipulasri.timelineview.TimelineView;
 
-
-
-public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.ViewHolder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     Context mContext;
 
-    public PendingAdapter(Context mContext) {
+    public NotificationAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.pending_items, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.notification_item, parent, false);
 
         return new ViewHolder(view,viewType);
     }
@@ -40,6 +37,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.ViewHold
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         public ViewHolder(View view, int viewType) {
             super(view);
 

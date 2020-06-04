@@ -19,7 +19,7 @@ public class DeliveredFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_delivered, container, false);
-        recyclerViewPending=(RecyclerView)view.findViewById(R.id.pendingRecyclerView);
+        recyclerViewPending=(RecyclerView)view.findViewById(R.id.deliveredRecyclerView);
         recyclerViewPending.setHasFixedSize(true);
         recyclerViewPending.setLayoutManager(new LinearLayoutManager(getContext()));
         deliveryAdapter=new DeliveryAdapter(getContext());
