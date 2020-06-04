@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="5dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:tint="@color/colorGrey1"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Order ID #66"
+
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Rs.500"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Completed on 04 May,2020"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="COD"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timelinePending"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="match_parent"
+                        app:endLineColor="@color/colorPrimary"
+                        app:lineWidth="2dp"
+                        app:marker="@drawable/ic_logistics"
+
+                        app:markerSize="20dp"
+                        app:startLineColor="@color/colorPrimary"
+                        app:timeline_marker_color="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pending">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timelineProcessing"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        app:endLineColor="@color/colorGrey1"
+                        app:lineOrientation="horizontal"
+                        app:linePadding="15dp"
+                        app:lineWidth="2dp"
+                        app:marker="@drawable/ic_logistics"
+                        app:markerInCenter="true"
+                        app:markerSize="20dp"
+                        app:startLineColor="@color/colorGrey1"
+                        app:timeline_line_style="normal"
+                        app:timeline_marker_color="@color/colorGrey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Processing">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timelineConfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:endLineColor="@color/colorPrimary"
+                        app:lineWidth="2dp"
+                        app:marker="@drawable/ic_logistics"
+                        app:markerSize="20dp"
+                        app:startLineColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confirm">
+
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
