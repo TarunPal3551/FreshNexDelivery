@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/textInputLayoutMobile"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:textColorHint="@color/colorGrey2">
 
@@ -61,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:id="@+id/textInputLayoutPassword"
                 android:textColorHint="@color/colorGrey2"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:passwordToggleEnabled="true">
