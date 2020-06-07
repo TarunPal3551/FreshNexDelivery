@@ -1,6 +1,7 @@
 package com.example.freshnexdelivery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -18,14 +19,19 @@ public class MainActivity extends AppCompatActivity {
     final Fragment fragment4 = new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
+    private static final String TAG = "MainActivity";
+    Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = new Preferences(this);
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         LoadFragment(active);
+        Log.d(TAG, "onCreate: " + preferences.getToken());
 
 
     }

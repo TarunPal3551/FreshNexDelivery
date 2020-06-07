@@ -9,14 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PendingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PendingFragment extends Fragment {
     RecyclerView recyclerViewPending;
     PendingAdapter pendingAdapter;
+    API_Interface api_interface;
+    Preferences preferences;
 
 
     public PendingFragment() {
@@ -29,11 +30,30 @@ public class PendingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pending, container, false);
-        recyclerViewPending=(RecyclerView)view.findViewById(R.id.pendingRecyclerView);
+        preferences = new Preferences(getActivity());
+        recyclerViewPending = (RecyclerView) view.findViewById(R.id.pendingRecyclerView);
         recyclerViewPending.setHasFixedSize(true);
         recyclerViewPending.setLayoutManager(new LinearLayoutManager(getContext()));
-        pendingAdapter=new PendingAdapter(getContext());
+        pendingAdapter = new PendingAdapter(getContext());
         recyclerViewPending.setAdapter(pendingAdapter);
+
         return view;
+    }
+
+    public void getPendingOrders() {
+        api_interface = RetrofitClient.getClient().getApi();
+        api_interface.getPendingOrders(preferences.getToken()).enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                if (response.code() == 200) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
     }
 }
