@@ -28,18 +28,18 @@ public interface API_Interface {
     Call<Object> resetPassword(@Query("token") String token, @Field("old_password") String password,
                                @Field("new_password") String newPassword);
 
-    @GET("changeavailability.php?token={remember_token}&status={status}")
-    Call<Object> changeStatus(@Path("remember_token") String token, @Path("status") String status);
+    @GET("changeavailability.php")
+    Call<Object> changeStatus(@Query("remember_token") String token, @Query("status") String status);
 
     @GET("pendingorders.php")
-    Call<Object> getPendingOrders(@Query("token") String token);
+    Call<OrderModel> getPendingOrders(@Query("token") String token);
 
     @GET("orderhistory.php")
     Call<Object> getOrders(@Query("token") String token);
 
-    @GET("orderstatus.php?token={remember_token}&status={status}&order_id={order_id}")
-    Call<Object> changeOrderStatus(@Path("remember_token") String token,
-                                   @Path("status") String status,
-                                   @Path("order_id") String order_id);
+    @GET("orderstatus.php")
+    Call<Object> changeOrderStatus(@Query("remember_token") String token,
+                                   @Query("status") String status,
+                                   @Query("order_id") String order_id);
 
 }

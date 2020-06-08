@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Context mContext;
+    ArrayList<Product> productArrayList;
 
-    public ProductAdapter(Context mContext) {
+    public ProductAdapter(Context mContext, ArrayList<Product> productArrayList) {
         this.mContext = mContext;
+        this.productArrayList = productArrayList;
     }
 
     @NonNull
@@ -35,17 +40,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
+        holder.nameTextView.setText("" + productArrayList.get(position).getName());
+        holder.quantityTextView.setText("" + productArrayList.get(position).getQuantity() + "x" + productArrayList.get(position).getQuantity_Type());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return productArrayList.size();
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView, priceTextView, quantityTextView;
+
         public ViewHolder(View view, int viewType) {
             super(view);
+            nameTextView = (TextView) view.findViewById(R.id.txt_title);
+            priceTextView = (TextView) view.findViewById(R.id.txt_price);
+            quantityTextView = (TextView) view.findViewById(R.id.txt_priceanditem);
 
 
         }

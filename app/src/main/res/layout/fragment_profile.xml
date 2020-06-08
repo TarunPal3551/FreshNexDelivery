@@ -26,6 +26,7 @@
 
                 app:menu="@menu/profile_menu"
                 app:title="My Profile"
+                android:id="@+id/materialToolbar"
 
                 app:titleTextColor="@android:color/white">
 
@@ -70,6 +71,7 @@
                     android:gravity="center_horizontal"
                     android:letterSpacing="0.1"
                     android:text="1234"
+                    android:id="@+id/partnerId"
                     android:textColor="@color/colorGrey1"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -120,7 +122,10 @@
                             <Switch
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="true"></Switch>
+                                android:checked="true"
+                                android:id="@+id/statusSwitch">
+
+                            </Switch>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -151,7 +156,8 @@
                             android:text="Phone Number"
                             android:textColor="@android:color/black"
                             android:textSize="14sp"
-                            android:textStyle="bold">
+                            android:textStyle="bold"
+                          >
 
                         </TextView>
 
@@ -161,7 +167,8 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:text="+917417391228"
-                            android:textSize="14sp">
+                            android:textSize="14sp"
+                            android:id="@+id/phoneTextView">
 
                         </TextView>
                     </LinearLayout>
@@ -197,6 +204,7 @@
                             android:gravity="right"
                             android:maxLines="1"
                             android:textSize="14sp"
+                            android:id="@+id/emailTextView"
                             android:text="tarunplay3551@gmail.com"
                            >
 
@@ -232,7 +240,8 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:text="813031305365"
-                            android:textSize="14sp">
+                            android:textSize="14sp"
+                            android:id="@+id/aadharTextView">
 
 
                         </TextView>
@@ -267,6 +276,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:id="@+id/vehicalTypeTextView"
                             android:text="Moto Bike"
                             android:textSize="14sp">
 
@@ -302,6 +312,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:id="@+id/vehicalNoTextView"
                             android:text="UP12G5251"
                             android:textSize="14sp">
 

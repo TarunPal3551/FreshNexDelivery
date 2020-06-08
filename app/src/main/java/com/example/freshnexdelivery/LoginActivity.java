@@ -67,10 +67,28 @@ public class LoginActivity extends AppCompatActivity {
                                         preferences.setToken(response.body().getData().getRememberToken());
                                         if (response.body().getData().getIsActivate() > 0) {
                                             preferences.setReset(true);
+                                            preferences.setEmail(response.body().getData().getEmail());
+                                            preferences.setPhone(response.body().getData().getMobile());
+                                            preferences.setName(response.body().getData().getName());
+                                            preferences.setPartnerId(response.body().getData().getPartnerId());
+                                            preferences.setId(response.body().getData().getId());
+                                            preferences.setStatus(response.body().getData().getStatus());
+                                            preferences.setAadharNumber(response.body().getData().getAadharNo());
+                                            preferences.setVehicalType(response.body().getData().getVehicleType());
+                                            preferences.setVehicalNum(response.body().getData().getVehicleNo());
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
                                         } else {
                                             preferences.setReset(false);
+                                            preferences.setEmail(response.body().getData().getEmail());
+                                            preferences.setPhone(response.body().getData().getMobile());
+                                            preferences.setName(response.body().getData().getName());
+                                            preferences.setPartnerId(response.body().getData().getPartnerId());
+                                            preferences.setId(response.body().getData().getId());
+                                            preferences.setStatus(response.body().getData().getStatus());
+                                            preferences.setAadharNumber(response.body().getData().getEmail());
+                                            preferences.setVehicalType(response.body().getData().getEmail());
+                                            preferences.setVehicalNum(response.body().getData().getEmail());
                                             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                                             startActivity(intent);
                                         }

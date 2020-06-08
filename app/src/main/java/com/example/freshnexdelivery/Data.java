@@ -33,7 +33,7 @@ public class Data {
     private String profPicUrl;
     @SerializedName("partner_id")
     @Expose
-    private Object partnerId;
+    private String partnerId;
     @SerializedName("password")
     @Expose
     private String password;
@@ -55,6 +55,27 @@ public class Data {
     @SerializedName("temp_pass")
     @Expose
     private String tempPass;
+
+    public Data(Integer id, String name, String email, String mobile, String address, String aadharNo, String vehicleType, String vehicleNo, String profPicUrl, String partnerId, String password, String rememberToken,
+                String availability, Integer isActivate, Integer status, String createdAt, String tempPass) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        this.aadharNo = aadharNo;
+        this.vehicleType = vehicleType;
+        this.vehicleNo = vehicleNo;
+        this.profPicUrl = profPicUrl;
+        this.partnerId = partnerId;
+        this.password = password;
+        this.rememberToken = rememberToken;
+        this.availability = availability;
+        this.isActivate = isActivate;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.tempPass = tempPass;
+    }
 
     public Integer getId() {
         return id;
@@ -128,11 +149,11 @@ public class Data {
         this.profPicUrl = profPicUrl;
     }
 
-    public Object getPartnerId() {
+    public String getPartnerId() {
         return partnerId;
     }
 
-    public void setPartnerId(Object partnerId) {
+    public void setPartnerId(String partnerId) {
         this.partnerId = partnerId;
     }
 
@@ -189,26 +210,6 @@ public class Data {
     }
 
     public void setTempPass(String tempPass) {
-        this.tempPass = tempPass;
-    }
-
-    public Data(Integer id, String name, String email, String mobile, String address, String aadharNo, String vehicleType, String vehicleNo, String profPicUrl, Object partnerId, String password, String rememberToken, String availability, Integer isActivate, Integer status, String createdAt, String tempPass) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.address = address;
-        this.aadharNo = aadharNo;
-        this.vehicleType = vehicleType;
-        this.vehicleNo = vehicleNo;
-        this.profPicUrl = profPicUrl;
-        this.partnerId = partnerId;
-        this.password = password;
-        this.rememberToken = rememberToken;
-        this.availability = availability;
-        this.isActivate = isActivate;
-        this.status = status;
-        this.createdAt = createdAt;
         this.tempPass = tempPass;
     }
 }

@@ -32,6 +32,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/textViewId"
                     android:text="Order ID #66"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
@@ -39,6 +40,7 @@
 
                 <TextView
                     android:layout_width="0dp"
+                    android:id="@+id/textViewPrice"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
@@ -58,6 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
+                android:id="@+id/textViewDeliveryDate"
                 android:text="Delivery Date  04-05-2020"
                 android:textColor="@color/colorGrey1"
                 android:textSize="14sp" />
@@ -67,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
                 android:gravity="right"
+                android:id="@+id/textViewPaymentMode"
                 android:text="Cash on delivery"
                 android:textAllCaps="true"
                 android:textColor="@color/colorGrey1"
@@ -92,6 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
                     android:text="Pending"
+                    android:id="@+id/textViewPaymentStatus"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
                     android:textAllCaps="true"/>
@@ -101,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
                     android:gravity="right"
+                    android:id="@+id/textViewDetails"
                     android:text="View Details"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"

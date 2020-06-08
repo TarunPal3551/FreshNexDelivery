@@ -9,6 +9,7 @@ public class OrderModel {
     @SerializedName("error")
     @Expose
     private Boolean error;
+
     @SerializedName("data")
     @Expose
     private ArrayList<OrderData> data;
