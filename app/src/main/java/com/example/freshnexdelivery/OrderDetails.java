@@ -1,5 +1,7 @@
 package com.example.freshnexdelivery;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -80,13 +82,13 @@ public class OrderDetails extends AppCompatActivity {
         String[] q_type = orderData.getPtype().split(getResources().getString(R.string.splitby));
         String[] id = orderData.getPid().split(getResources().getString(R.string.splitby));
         for (int i = 0; i < name.length; i++) {
-            productArrayList.add(new Product((name[i].replace("$", "")), "₹ " + price[i].replace("$", ""), quantity[i].replace("$", ""), q_type[i].replace("$", ""), id[i].replace("$", "")));
+            productArrayList.add(new Product((name[i].replace("$", "")), "₹" + price[i].replace("$", ""), quantity[i].replace("$", ""), q_type[i].replace("$", ""), id[i].replace("$", "")));
         }
-        textViewTotalItems.setText("" + productArrayList.size());
+        textViewTotalItems.setText("Total Items: " + productArrayList.size());
 
         productAdapter = new ProductAdapter(this, productArrayList);
         recyclerViewProducts.setAdapter(productAdapter);
-        if (orderData.getStatus().equals("cancelled") && orderData.getStatus().equals("delivered")) {
+        if (orderData.getStatus().equals("cancelled") || orderData.getStatus().equals("delivered")) {
             buttonLayout.setVisibility(View.GONE);
         } else {
             buttonLayout.setVisibility(View.VISIBLE);
@@ -103,6 +105,14 @@ public class OrderDetails extends AppCompatActivity {
                 changeOrderStatus("cancelled");
             }
         });
+        floatingCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + orderData.getUser().get(0).getMobile()));
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -113,12 +123,14 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Log.d(TAG, "onResponse: " + response.body());
-                if (response.body() != null) {
+                if (response.code() == 200) {
                     try {
                         JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
                         if (!jsonObject.getBoolean("error")) {
                             Toast.makeText(OrderDetails.this, "Status Updated", Toast.LENGTH_SHORT).show();
+                            buttonLayout.setVisibility(View.GONE);
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

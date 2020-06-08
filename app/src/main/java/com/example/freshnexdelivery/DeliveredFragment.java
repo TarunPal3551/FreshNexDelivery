@@ -43,17 +43,24 @@ public class DeliveredFragment extends Fragment {
     public void getPendingOrders() {
         orderDataArrayList = new ArrayList<>();
         api_interface = RetrofitClient.getClient().getApi();
-        api_interface.getPendingOrders(preferences.getToken()).enqueue(new Callback<OrderModel>() {
+        api_interface.getOrders(preferences.getToken()).enqueue(new Callback<OrderModel>() {
             @Override
             public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
-                Log.d(TAG, "onResponse: " + response.body());
+                Log.d(TAG, "onResponse: " + response.body().getData().toString());
                 if (!response.body().getError()) {
                     orderDataArrayList = response.body().getData();
-                    deliveryAdapter = new DeliveryAdapter(getContext(), orderDataArrayList);
-                    recyclerViewPending.setAdapter(deliveryAdapter);
+                    if (orderDataArrayList.size()>0){
+                        deliveryAdapter = new DeliveryAdapter(getContext(), orderDataArrayList);
+                        recyclerViewPending.setAdapter(deliveryAdapter);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "No Delivered Orders", Toast.LENGTH_SHORT).show();
+
+                    }
+
 
                 } else {
-                    Toast.makeText(getContext(), "Token Expired...Login Again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Token Expired...Login Again", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -57,12 +57,18 @@ public class PendingFragment extends Fragment {
                 Log.d(TAG, "onResponse: " + response.body().getError());
                 if (!response.body().getError()) {
                     orderDataArrayList = response.body().getData();
-                    pendingAdapter = new PendingAdapter(getContext(), orderDataArrayList);
-                    recyclerViewPending.setAdapter(pendingAdapter);
+                    if (orderDataArrayList.size()>0){
+                        pendingAdapter = new PendingAdapter(getContext(), orderDataArrayList);
+                        recyclerViewPending.setAdapter(pendingAdapter);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "No Pending Orders", Toast.LENGTH_SHORT).show();
+                    }
+
 
                 } else {
 
-                    Toast.makeText(getContext(), "Token Expired...Login Again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Token Expired...Login Again", Toast.LENGTH_SHORT).show();
                 }
             }
 

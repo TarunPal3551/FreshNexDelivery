@@ -10,8 +10,10 @@ public class Constant {
     public static final String Vehical_Type = "Vehical_Type";
     public static final String VehicalNumber = "VehicalNumber";
     public static final String partner_Id= "partner_Id";
+    public static final String Profile= "profile";
     public static final String Id= "Id";
     public static final String Password_Reset = "Password_Reset";
     public static final String Product_Details = "Product_Details";
+    public static final String Image_Base_URL = "https://avilaksh.com/freshnex/admin/";
 
 }

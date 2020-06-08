@@ -31,11 +31,13 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Preferences preferences = new Preferences(mContext);
+                preferences.setProductDetails(orderDataArrayList.get(position));
                 Intent intent = new Intent(mContext, OrderDetails.class);
                 mContext.startActivity(intent);
             }
@@ -43,6 +45,8 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
         holder.textViewViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Preferences preferences = new Preferences(mContext);
+                preferences.setProductDetails(orderDataArrayList.get(position));
                 Intent intent = new Intent(mContext, OrderDetails.class);
                 mContext.startActivity(intent);
             }

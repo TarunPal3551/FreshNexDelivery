@@ -103,6 +103,14 @@ public class Preferences {
     public String getVehicalNum() {
         return sharedPreferences.getString(Constant.VehicalNumber, "");
     }
+    public void setProfile(String token) {
+        editor.putString(Constant.Profile, token);
+        editor.commit();
+    }
+
+    public String getProfile() {
+        return sharedPreferences.getString(Constant.Profile, "");
+    }
 
     public void setReset(boolean value) {
         editor.putBoolean(Constant.Password_Reset, value);

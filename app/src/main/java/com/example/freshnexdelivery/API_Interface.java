@@ -29,16 +29,16 @@ public interface API_Interface {
                                @Field("new_password") String newPassword);
 
     @GET("changeavailability.php")
-    Call<Object> changeStatus(@Query("remember_token") String token, @Query("status") String status);
+    Call<Object> changeStatus(@Query("token") String token, @Query("status") String status);
 
     @GET("pendingorders.php")
     Call<OrderModel> getPendingOrders(@Query("token") String token);
 
     @GET("orderhistory.php")
-    Call<Object> getOrders(@Query("token") String token);
+    Call<OrderModel> getOrders(@Query("token") String token);
 
     @GET("orderstatus.php")
-    Call<Object> changeOrderStatus(@Query("remember_token") String token,
+    Call<Object> changeOrderStatus(@Query("token") String token,
                                    @Query("status") String status,
                                    @Query("order_id") String order_id);
 

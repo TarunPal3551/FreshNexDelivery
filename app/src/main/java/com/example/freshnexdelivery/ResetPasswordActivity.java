@@ -1,5 +1,6 @@
 package com.example.freshnexdelivery;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +23,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
     Preferences preferences;
     private static final String TAG = "ResetPasswordActivity";
     MaterialButton resetButton;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
+        progressDialog = new ProgressDialog(ResetPasswordActivity.this);
+        progressDialog.setMessage("Processing...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         preferences = new Preferences(this);
         textInputLayoutOldPassword = (TextInputLayout) findViewById(R.id.textInputLayoutOldPswd);
         textInputLayoutNewPassword = (TextInputLayout) findViewById(R.id.textInputLayoutNewPswd);
@@ -37,17 +43,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validate()) {
                     resetPassword();
-
                 }
             }
         });
     }
 
     public void resetPassword() {
+        progressDialog.show();
         api_interface = RetrofitClient.getClient().getApi();
         api_interface.resetPassword(preferences.getToken(), oldPassword, newPassword).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                progressDialog.dismiss();
                 Log.d(TAG, "onResponse: " + response);
                 if (response.code() == 200) {
                     Log.d(TAG, "onResponse: " + response.body());
@@ -59,11 +66,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                     Toast.makeText(ResetPasswordActivity.this, "Wrong Old Password", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 

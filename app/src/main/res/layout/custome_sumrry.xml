@@ -9,19 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="1dp">
-
-        <LinearLayout
-            android:layout_width="65dp"
-            android:layout_height="60dp">
-
-            <ImageView
-                android:id="@+id/img_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" />
-        </LinearLayout>
-
+        android:padding="8dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

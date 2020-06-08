@@ -1,7 +1,6 @@
 package com.example.freshnexdelivery;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +32,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, OrderDetails.class);
-                mContext.startActivity(intent);
-            }
-        });
+
+        holder.priceTextView.setText("" + productArrayList.get(position).getPrice());
         holder.nameTextView.setText("" + productArrayList.get(position).getName());
         holder.quantityTextView.setText("" + productArrayList.get(position).getQuantity() + "x" + productArrayList.get(position).getQuantity_Type());
     }

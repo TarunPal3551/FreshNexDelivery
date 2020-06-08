@@ -1,5 +1,6 @@
 package com.example.freshnexdelivery;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutMobile, textInputLayoutPassword;
     private static final String TAG = "LoginActivity";
     Preferences preferences;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -35,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         preferences = new Preferences(this);
+        progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setMessage("Processing...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         materialButton = (MaterialButton) findViewById(R.id.loginButton);
         resetPassword = (TextView) findViewById(R.id.txt_forgotpassword);
         textInputLayoutMobile = (TextInputLayout) findViewById(R.id.textInputLayoutMobile);
@@ -51,12 +54,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (validation()) {
+                    progressDialog.show();
                     api_interface = RetrofitClient.getClient().getApi();
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("mobile", phone);
-                        jsonObject.put("password", password);
-                        api_interface.login(phone, password).enqueue(new Callback<LoginModel>() {
+
+
+                    api_interface.login(phone, password).enqueue(new Callback<LoginModel>() {
                             @Override
                             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
                                 //   try {
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.setAadharNumber(response.body().getData().getAadharNo());
                                             preferences.setVehicalType(response.body().getData().getVehicleType());
                                             preferences.setVehicalNum(response.body().getData().getVehicleNo());
+                                            preferences.setProfile(response.body().getData().getProfPicUrl());
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
                                         } else {
@@ -86,19 +89,23 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.setPartnerId(response.body().getData().getPartnerId());
                                             preferences.setId(response.body().getData().getId());
                                             preferences.setStatus(response.body().getData().getStatus());
+                                            preferences.setProfile(response.body().getData().getProfPicUrl());
                                             preferences.setAadharNumber(response.body().getData().getEmail());
                                             preferences.setVehicalType(response.body().getData().getEmail());
                                             preferences.setVehicalNum(response.body().getData().getEmail());
                                             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                                             startActivity(intent);
                                         }
+                                        progressDialog.dismiss();
 
                                     } else {
+                                        progressDialog.dismiss();
                                         Toast.makeText(LoginActivity.this, "Wrong Mobile or Password", Toast.LENGTH_SHORT).show();
 
                                     }
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    Toast.makeText(LoginActivity.this, "Wrong Mobile or Password", Toast.LENGTH_SHORT).show();
                                 }
                                 // JSONObject jsonObject = new JSONObject(response.body().toString());
 
@@ -112,11 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<LoginModel> call, Throwable t) {
                                 Log.d(TAG, "onFailure: " + t.getMessage());
+                                progressDialog.dismiss();
                             }
                         });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
 
 
                 }
