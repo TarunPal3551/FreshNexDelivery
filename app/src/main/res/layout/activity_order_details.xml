@@ -51,7 +51,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:text="Order ID #66"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
@@ -61,7 +61,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="0.5"
                             android:gravity="right"
                             android:text="Rs.500.0"
                             android:id="@+id/textViewPrice"
@@ -96,7 +96,7 @@
                             android:text="Cash on delivery"
                             android:textAllCaps="true"
                             android:textColor="@color/colorGrey1"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -153,12 +153,13 @@
                     android:background="@color/colorAccent"
                     android:src="@drawable/ic_outline_call_24"
                     android:tint="@android:color/white"
-                    app:backgroundTint="@color/colorAccent"
+                    app:backgroundTint="@color/colorPrimary"
                     app:elevation="0dp"
                     android:id="@+id/floatingCallButton"
-                    app:fabCustomSize="30dp"
+                    app:fabCustomSize="35dp"
                     app:tint="@android:color/white"
-                    app:useCompatPadding="true">
+                    app:useCompatPadding="true"
+                    >
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
@@ -166,7 +167,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:id="@+id/customerDetailsLayout">
 
 
                     <LinearLayout

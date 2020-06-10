@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
@@ -19,11 +20,11 @@ import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    MaterialButton materialButton;
+    Button materialButton;
     TextView resetPassword;
     API_Interface api_interface;
     String phone, password;
-    TextInputLayout textInputLayoutMobile, textInputLayoutPassword;
+    TextInputEditText textInputLayoutMobile, textInputLayoutPassword;
     private static final String TAG = "LoginActivity";
     Preferences preferences;
     ProgressDialog progressDialog;
@@ -38,10 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Processing...");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
-        materialButton = (MaterialButton) findViewById(R.id.loginButton);
-        resetPassword = (TextView) findViewById(R.id.txt_forgotpassword);
-        textInputLayoutMobile = (TextInputLayout) findViewById(R.id.textInputLayoutMobile);
-        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
+        materialButton = (Button) findViewById(R.id.loginButton);
+        resetPassword = (Button) findViewById(R.id.txt_forgotpassword);
+        textInputLayoutMobile = (TextInputEditText) findViewById(R.id.ed_username);
+        textInputLayoutPassword = (TextInputEditText) findViewById(R.id.ed_password);
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,8 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.setVehicalType(response.body().getData().getVehicleType());
                                             preferences.setVehicalNum(response.body().getData().getVehicleNo());
                                             preferences.setProfile(response.body().getData().getProfPicUrl());
+                                            preferences.setPartnerId(response.body().getData().getPartnerId());
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         } else {
                                             preferences.setReset(false);
                                             preferences.setEmail(response.body().getData().getEmail());
@@ -93,8 +96,11 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.setAadharNumber(response.body().getData().getEmail());
                                             preferences.setVehicalType(response.body().getData().getEmail());
                                             preferences.setVehicalNum(response.body().getData().getEmail());
+                                            preferences.setPartnerId(response.body().getData().getPartnerId());
+
                                             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         }
                                         progressDialog.dismiss();
 
@@ -132,8 +138,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean validation() {
-        phone = textInputLayoutMobile.getEditText().getText().toString();
-        password = textInputLayoutPassword.getEditText().getText().toString();
+        phone = textInputLayoutMobile.getText().toString();
+        password = textInputLayoutPassword.getText().toString();
 
         if (phone.isEmpty()) {
             textInputLayoutMobile.setError("Required");

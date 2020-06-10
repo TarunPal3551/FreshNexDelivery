@@ -3,6 +3,9 @@ package com.example.freshnexdelivery;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -21,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = fragment1;
     private static final String TAG = "MainActivity";
     Preferences preferences;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = new Preferences(this);
+        OneSignal.setSubscription(true);
+        OneSignal.setExternalUserId(preferences.getPhone());
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -78,4 +86,35 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setCancelable(true);
+        bottomSheetDialog.setCanceledOnTouchOutside(true);
+        bottomSheetDialog.setContentView(R.layout.order_cancel_dialog);
+//                bottomSheetDialog.set(DialogFragment.STYLE_NO_FRAME, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Button yesButton = (Button) bottomSheetDialog.findViewById(R.id.yesButton);
+        Button noButton = (Button) bottomSheetDialog.findViewById(R.id.noButton);
+        TextView textView = (TextView) bottomSheetDialog.findViewById(R.id.textViewTittle);
+        textView.setText("Are you sure you want to Exit?");
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.cancel();
+                MainActivity.super.onBackPressed();
+
+
+            }
+        });
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        bottomSheetDialog.show();
+
+    }
 }

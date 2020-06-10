@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorGrey0"
+
     tools:context=".NotificationFragment">
 
     <RelativeLayout
@@ -18,8 +18,7 @@
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
             app:menu="@menu/menu_toolbar"
-            app:title="Notifications"
-
+            app:title="Guidelines"
             app:titleTextColor="@android:color/white">
 
         </com.google.android.material.appbar.MaterialToolbar>

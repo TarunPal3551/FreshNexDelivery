@@ -3,16 +3,20 @@ package com.example.freshnexdelivery;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 1000;
     Preferences preferences;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        imageView=(ImageView)findViewById(R.id.splashImage);
+
         preferences = new Preferences(this);
         if (preferences.getToken().equals("")) {
             new Handler().postDelayed(new Runnable() {

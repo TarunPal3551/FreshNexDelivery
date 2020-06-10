@@ -5,24 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    TextInputLayout textInputLayoutOldPassword, textInputLayoutNewPassword, textInputLayoutConfirmPassword;
+    TextInputEditText textInputLayoutOldPassword, textInputLayoutNewPassword, textInputLayoutConfirmPassword;
     String oldPassword, newPassword, confirmPassword;
     API_Interface api_interface;
     Preferences preferences;
     private static final String TAG = "ResetPasswordActivity";
-    MaterialButton resetButton;
+    Button resetButton;
     ProgressDialog progressDialog;
 
     @Override
@@ -34,10 +34,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         preferences = new Preferences(this);
-        textInputLayoutOldPassword = (TextInputLayout) findViewById(R.id.textInputLayoutOldPswd);
-        textInputLayoutNewPassword = (TextInputLayout) findViewById(R.id.textInputLayoutNewPswd);
-        textInputLayoutConfirmPassword = (TextInputLayout) findViewById(R.id.textInputLayoutConfirmNewPswd);
-        resetButton = (MaterialButton) findViewById(R.id.resetButton);
+        textInputLayoutOldPassword = (TextInputEditText) findViewById(R.id.ed_username);
+        textInputLayoutNewPassword = (TextInputEditText) findViewById(R.id.ed_password);
+        textInputLayoutConfirmPassword = (TextInputEditText) findViewById(R.id.ed_confirmpassword);
+        resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +78,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     public boolean validate() {
-        oldPassword = textInputLayoutOldPassword.getEditText().getText().toString();
-        newPassword = textInputLayoutNewPassword.getEditText().getText().toString();
-        confirmPassword = textInputLayoutConfirmPassword.getEditText().getText().toString();
+        oldPassword = textInputLayoutOldPassword.getText().toString();
+        newPassword = textInputLayoutNewPassword.getText().toString();
+        confirmPassword = textInputLayoutConfirmPassword.getText().toString();
         if (oldPassword.isEmpty()) {
             textInputLayoutOldPassword.setError("Required");
             return false;

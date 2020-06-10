@@ -60,7 +60,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.ViewHold
         }
         holder.textViewPaymentMode.setText("" + orderDataArrayList.get(position).getpMethod());
         holder.textViewPrice.setText("₹" + orderDataArrayList.get(position).getTotal());
-        holder.textViewDeliveryDate.setText("Delivery Date" + orderDataArrayList.get(position).getDdate());
+        holder.textViewDeliveryDate.setText("Delivery Date " + orderDataArrayList.get(position).getDdate().replaceFirst("--",""));
         holder.orderIdTextView.setText("Order Id #" + orderDataArrayList.get(position).getOid());
     }
 
@@ -83,11 +83,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.ViewHold
             orderIdTextView = (TextView) view.findViewById(R.id.textViewId);
             textViewViewDetails = (TextView) view.findViewById(R.id.textViewDetails);
             textViewPaymentMode = (TextView) view.findViewById(R.id.textViewPaymentMode);
-
             textViewStatus = (TextView) view.findViewById(R.id.textViewPaymentStatus);
-
             textViewPrice = (TextView) view.findViewById(R.id.textViewPrice);
-
             textViewDeliveryDate = (TextView) view.findViewById(R.id.textViewDeliveryDate);
 
 

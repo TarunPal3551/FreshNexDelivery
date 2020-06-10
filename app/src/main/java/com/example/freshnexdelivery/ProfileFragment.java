@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -66,10 +68,37 @@ public class ProfileFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.logout) {
-                    preferences.setToken("");
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+
+
+                    final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.AppBottomSheetDialogTheme);
+                    bottomSheetDialog.setCancelable(true);
+                    bottomSheetDialog.setCanceledOnTouchOutside(true);
+                    bottomSheetDialog.setContentView(R.layout.order_cancel_dialog);
+//                bottomSheetDialog.set(DialogFragment.STYLE_NO_FRAME, R.style.AppBottomSheetDialogTheme);
+                    bottomSheetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button yesButton = (Button) bottomSheetDialog.findViewById(R.id.yesButton);
+                    Button noButton = (Button) bottomSheetDialog.findViewById(R.id.noButton);
+                    TextView textView = (TextView) bottomSheetDialog.findViewById(R.id.textViewTittle);
+                    textView.setText("Are you sure you want to Log Out?");
+                    yesButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bottomSheetDialog.cancel();
+                            preferences.setToken("");
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+
+
+                        }
+                    });
+                    noButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bottomSheetDialog.dismiss();
+                        }
+                    });
+                    bottomSheetDialog.show();
                 }
                 return false;
             }
@@ -85,7 +114,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        Glide.with(getContext()).load(Constant.Image_Base_URL + "/" + preferences.getProfile()).thumbnail(Glide.with(getContext()).load(R.drawable.placeholder)).into(circleImageView);
+        Glide.with(getContext()).load(Constant.Image_Base_URL  + preferences.getProfile()).thumbnail(Glide.with(getContext()).load(R.drawable.placeholder)).into(circleImageView);
 
 
         return view;

@@ -5,14 +5,24 @@ public class Product {
     String price;
     String quantity;
     String quantity_Type;
-    String  Id;
+    String Id;
+    String imageUrl;
 
-    public Product(String name, String price, String quantity, String quantity_Type, String id) {
+    public Product(String name, String price, String quantity, String quantity_Type, String id, String imageUrl) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.quantity_Type = quantity_Type;
         Id = id;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {

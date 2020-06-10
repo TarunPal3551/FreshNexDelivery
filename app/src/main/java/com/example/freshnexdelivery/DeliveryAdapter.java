@@ -58,7 +58,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
         }
         holder.textViewPaymentMode.setText("" + orderDataArrayList.get(position).getpMethod());
         holder.textViewPrice.setText("₹" + orderDataArrayList.get(position).getTotal());
-        holder.textViewDeliveryDate.setText("Delivered On" + orderDataArrayList.get(position).getDdate());
+        holder.textViewDeliveryDate.setText("Delivered On " + orderDataArrayList.get(position).getDdate().replaceFirst("--",""));
         holder.orderIdTextView.setText("Order Id #" + orderDataArrayList.get(position).getOid());
 
     }

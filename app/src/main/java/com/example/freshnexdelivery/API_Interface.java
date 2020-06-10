@@ -37,6 +37,9 @@ public interface API_Interface {
     @GET("orderhistory.php")
     Call<OrderModel> getOrders(@Query("token") String token);
 
+    @GET("productdetails.php")
+    Call<PData> getProductDetails(@Query("product_id") String id);
+
     @GET("orderstatus.php")
     Call<Object> changeOrderStatus(@Query("token") String token,
                                    @Query("status") String status,
