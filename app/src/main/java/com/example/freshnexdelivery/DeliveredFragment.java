@@ -67,7 +67,7 @@ public class DeliveredFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         orderDataArrayList = new ArrayList<>();
         api_interface = RetrofitClient.getClient().getApi();
-        api_interface.getOrders(preferences.getToken()).enqueue(new Callback<OrderModel>() {
+        api_interface.getDeliveredOrders(preferences.getToken()).enqueue(new Callback<OrderModel>() {
             @Override
             public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
                 Log.d(TAG, "onResponse: " + response.body().getData().toString());

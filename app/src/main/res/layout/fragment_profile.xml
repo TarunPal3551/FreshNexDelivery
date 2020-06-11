@@ -72,6 +72,7 @@
                     android:gravity="center_horizontal"
                     android:letterSpacing="0.1"
                     android:text="1234"
+                    android:textAllCaps="true"
                     android:id="@+id/partnerId"
                     android:textColor="@color/colorGrey1"
                     android:textSize="14sp" />
@@ -372,7 +373,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="01"
+                            android:text="..."
+                            android:id="@+id/textViewPendingCount"
 
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
@@ -422,7 +424,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="01"
+                            android:text="..."
+                            android:id="@+id/textViewDeliveredCount"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -470,7 +473,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="01"
+                            android:text="..."
+                            android:id="@+id/textViewCancelledCount"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />

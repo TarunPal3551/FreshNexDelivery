@@ -35,6 +35,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.imageView.setImageResource(productImageArrayList.get(position).getImage());
         holder.textViewGuide1.setText(productImageArrayList.get(position).getText1());
         holder.textViewGuide2.setText(productImageArrayList.get(position).getText2());
+        holder.textViewGuide3.setText("Step " + (position + 1));
 
 
     }
@@ -47,13 +48,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textViewGuide1, textViewGuide2;
+        TextView textViewGuide1, textViewGuide2, textViewGuide3;
 
         public ViewHolder(View view, int viewType) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageGuide);
             textViewGuide1 = (TextView) view.findViewById(R.id.textGuide1);
             textViewGuide2 = (TextView) view.findViewById(R.id.textGuide2);
+            textViewGuide3 = (TextView) view.findViewById(R.id.textGuide3);
 
 
         }

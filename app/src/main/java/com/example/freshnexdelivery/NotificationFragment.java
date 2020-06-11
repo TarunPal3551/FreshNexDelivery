@@ -24,11 +24,11 @@ public class NotificationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
         recyclerViewNotification = (RecyclerView) view.findViewById(R.id.notificationRecyclerView);
         productImageArrayList = new ArrayList<>();
-        productImageArrayList.add(new GuidlineData(R.drawable.guide1, "Wear Mask", "Wear Mask"));
-        productImageArrayList.add(new GuidlineData(R.drawable.guide2, "Wear Mask", "Wear Mask"));
-        productImageArrayList.add(new GuidlineData(R.drawable.guide3, "Wear Mask", "Wear Mask"));
-        productImageArrayList.add(new GuidlineData(R.drawable.guide4, "Wear Mask", "Wear Mask"));
-        productImageArrayList.add(new GuidlineData(R.drawable.guide5, "Wear Mask", "Wear Mask"));
+        productImageArrayList.add(new GuidlineData(R.drawable.guide1, "Wear Face Mask", "Keep your face covered with a face mask and avoid touching your face."));
+        productImageArrayList.add(new GuidlineData(R.drawable.guide2, "Wash Your Hands", "Wash your hands frequently with soap or use hand sanitizer every timme."));
+        productImageArrayList.add(new GuidlineData(R.drawable.guide3, "Check Temperature", "Check your body temperature with thermal screening device every morning."));
+        productImageArrayList.add(new GuidlineData(R.drawable.guide4, "No Contact Delivery", "We believe in touch free delivery so keep the parcel outside the door."));
+        productImageArrayList.add(new GuidlineData(R.drawable.guide5, "Defeat Corona Virus", "Follow the above guidelines to defeat Corona virus to affect you and others."));
         recyclerViewNotification.setHasFixedSize(true);
         recyclerViewNotification.setLayoutManager(new LinearLayoutManager(getContext()));
         notificationAdapter = new NotificationAdapter(getContext(), productImageArrayList);

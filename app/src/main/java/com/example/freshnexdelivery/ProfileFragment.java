@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +34,12 @@ public class ProfileFragment extends Fragment {
     MaterialToolbar materialToolbar;
     Switch statusSwitch;
     API_Interface api_interface;
+    TextView textViewPending, textViewDelivered, textViewCancelled;
     private static final String TAG = "ProfileFragment";
+    ArrayList<OrderData> orderDataArrayList = new ArrayList<>();
+    int countPending = 0;
+    int countDelivered = 0;
+    int countCancelled = 0;
 
 
     @Override
@@ -50,6 +57,9 @@ public class ProfileFragment extends Fragment {
         vehicalTypeTextView = (TextView) view.findViewById(R.id.vehicalTypeTextView);
         circleImageView = (CircleImageView) view.findViewById(R.id.profile_image);
         materialToolbar = (MaterialToolbar) view.findViewById(R.id.materialToolbar);
+        textViewPending = (TextView) view.findViewById(R.id.textViewPendingCount);
+        textViewDelivered = (TextView) view.findViewById(R.id.textViewDeliveredCount);
+        textViewCancelled = (TextView) view.findViewById(R.id.textViewCancelledCount);
 
         preferences = new Preferences(getContext());
         nameTextView.setText("" + preferences.getName());
@@ -58,7 +68,7 @@ public class ProfileFragment extends Fragment {
         aadharTextView.setText("" + preferences.getAadharNumber());
         vehicalNumberTextView.setText("" + preferences.getVehicalNum());
         vehicalTypeTextView.setText("" + preferences.getVehicalType());
-        partnerIdTextView.setText("" + preferences.getPartnerId());
+        partnerIdTextView.setText("Partner Id " + preferences.getPartnerId());
         if (preferences.getStatus() > 0) {
             statusSwitch.setChecked(true);
         } else {
@@ -117,9 +127,52 @@ public class ProfileFragment extends Fragment {
         });
 
         Glide.with(getContext()).load(Constant.Image_Base_URL + preferences.getProfile()).thumbnail(Glide.with(getContext()).load(R.drawable.plroduct_place)).into(circleImageView);
-
+        getOrderCount();
 
         return view;
+    }
+
+    public void getOrderCount() {
+        countCancelled=0;
+        countDelivered=0;
+        countPending=0;
+        api_interface = RetrofitClient.getClient().getApi();
+        api_interface.getOrders(preferences.getToken()).enqueue(new Callback<OrderModel>() {
+            @Override
+            public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                Log.d(TAG, "onResponse: " + response.body().getData().toString());
+                if (!response.body().getError()) {
+                    orderDataArrayList = response.body().getData();
+                    for (int i = 0; i < orderDataArrayList.size(); i++) {
+                        if (orderDataArrayList.get(i).getStatus().equals("cancelled")) {
+                            countCancelled = countCancelled + 1;
+                        } else if (orderDataArrayList.get(i).getStatus().equals("delivered")) {
+                            countDelivered = countDelivered + 1;
+                        } else {
+                            countPending = countPending + 1;
+
+                        }
+
+
+                    }
+                    textViewCancelled.setText("" + countCancelled);
+                    textViewDelivered.setText("" + countDelivered);
+                    textViewPending.setText("" + countPending);
+
+
+                } else {
+                    textViewCancelled.setText("" + 0);
+                    textViewDelivered.setText("" + 0);
+                    textViewPending.setText("" + 0);
+                    //  Toast.makeText(getActivity(), "Token Expired...Login Again", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderModel> call, Throwable t) {
+
+            }
+        });
     }
 
     public void changeAvailaibleStatus(final String status) {

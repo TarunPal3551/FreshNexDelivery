@@ -143,7 +143,7 @@ public class OrderDetails extends AppCompatActivity {
                 Button yesButton = (Button) bottomSheetDialog.findViewById(R.id.yesButton);
                 Button noButton = (Button) bottomSheetDialog.findViewById(R.id.noButton);
                 TextView textView = (TextView) bottomSheetDialog.findViewById(R.id.textViewTittle);
-                textView.setText("Are you sure you want to Cancel the Order?");
+                textView.setText("Are you sure you want to Delivered the Order?");
                 yesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
