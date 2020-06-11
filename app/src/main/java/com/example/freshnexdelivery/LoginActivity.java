@@ -93,9 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                                             preferences.setId(response.body().getData().getId());
                                             preferences.setStatus(response.body().getData().getStatus());
                                             preferences.setProfile(response.body().getData().getProfPicUrl());
-                                            preferences.setAadharNumber(response.body().getData().getEmail());
-                                            preferences.setVehicalType(response.body().getData().getEmail());
-                                            preferences.setVehicalNum(response.body().getData().getEmail());
+                                            preferences.setAadharNumber(response.body().getData().getAadharNo());
+                                            preferences.setVehicalType(response.body().getData().getVehicleType());
+                                            preferences.setVehicalNum(response.body().getData().getVehicleNo());
                                             preferences.setPartnerId(response.body().getData().getPartnerId());
 
                                             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);

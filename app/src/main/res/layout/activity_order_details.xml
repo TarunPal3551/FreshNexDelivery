@@ -139,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            android:id="@+id/customerDetailsLayout">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -168,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    android:id="@+id/customerDetailsLayout">
+                  >
 
 
                     <LinearLayout

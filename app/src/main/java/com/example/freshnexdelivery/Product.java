@@ -1,11 +1,20 @@
 package com.example.freshnexdelivery;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Product {
-    String  name;
+    @SerializedName("pname")
+    String name;
+    @SerializedName("pprice")
     String price;
+    @SerializedName("pgms")
     String quantity;
+    @SerializedName("discount")
     String quantity_Type;
+
+    @SerializedName("id")
     String Id;
+    @SerializedName("pimg")
     String imageUrl;
 
     public Product(String name, String price, String quantity, String quantity_Type, String id, String imageUrl) {
@@ -13,7 +22,7 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.quantity_Type = quantity_Type;
-        Id = id;
+        this.Id = id;
         this.imageUrl = imageUrl;
     }
 

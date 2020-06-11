@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +43,7 @@ public class OrderDetails extends AppCompatActivity {
     ArrayList<Product> productArrayList = new ArrayList<>();
     FloatingActionButton floatingCallButton;
     TextView textViewOrderId, textViewPrice, textViewDeliveryDate, textViewDeliveryTime, textViewTotalItems, textViewUserName, textViewAddress, textViewStatus, textViewPaymentMode;
-    LinearLayout customerDetailsLayout;
+    CardView customerDetailsLayout;
     MaterialToolbar toolbar;
     ProgressDialog progressDialog;
     ProductImage productImage;
@@ -68,7 +69,7 @@ public class OrderDetails extends AppCompatActivity {
         textViewTotalItems = (TextView) findViewById(R.id.textViewTotalItems);
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
         textViewUserName = (TextView) findViewById(R.id.textViewUsername);
-        customerDetailsLayout = (LinearLayout) findViewById(R.id.customerDetailsLayout);
+        customerDetailsLayout = (CardView) findViewById(R.id.customerDetailsLayout);
 
 
         recyclerViewProducts = (RecyclerView) findViewById(R.id.recyclerViewProducts);
@@ -77,6 +78,7 @@ public class OrderDetails extends AppCompatActivity {
         productAdapter = new ProductAdapter(this, productArrayList);
         recyclerViewProducts.setAdapter(productAdapter);
         orderData = preferences.getProductDetailsJson();
+        Log.d(TAG, "onCreate: Prouduct Details" + orderData.toString());
 //        StringTokenizer tokenName = new StringTokenizer(orderData.getPname(), getString(R.string.splitby));
 //        StringTokenizer tokenprice = new StringTokenizer(orderData.getPname(), getString(R.string.splitby));
 //        StringTokenizer tokenquantity = new StringTokenizer(orderData.getPname(), getString(R.string.splitby));
@@ -97,60 +99,26 @@ public class OrderDetails extends AppCompatActivity {
         final String[] quantity = orderData.getQty().split(getResources().getString(R.string.splitby));
         final String[] q_type = orderData.getPtype().split(getResources().getString(R.string.splitby));
         final String[] id = orderData.getPid().split(getResources().getString(R.string.splitby));
-        for (int i = 0; i < name.length; i++) {
-            API_Interface api_interface = RetrofitClient.getClient().getApi();
-            final int finalI = i;
-            api_interface.getProductDetails(id[i]).enqueue(new Callback<PData>() {
-                @Override
-                public void onResponse(Call<PData> call, Response<PData> response) {
-                    Log.d(TAG, "onResponse: " + response.body().getData().getPimg());
-                    if (response.body() != null && response.body().getError()) {
-                        String imageUrl = response.body().getData().getPimg();
-                        productImage = response.body().getData();
-                        if (productImage != null) {
-                            productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), imageUrl));
-                            productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                            recyclerViewProducts.setAdapter(productAdapter);
-                        } else {
-                            productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), imageUrl));
-                            productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                            recyclerViewProducts.setAdapter(productAdapter);
-                        }
-                    } else {
-
-                        productImage = null;
-                        if (productImage != null) {
-                            productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), productImage.getPimg()));
-                            productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                            recyclerViewProducts.setAdapter(productAdapter);
-                        } else {
-                            productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), null));
-                            productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                            recyclerViewProducts.setAdapter(productAdapter);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<PData> call, Throwable t) {
-                    Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                    if (productImage != null) {
-                        productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), productImage.getPimg()));
-                        productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                        recyclerViewProducts.setAdapter(productAdapter);
-                    } else {
-                        productArrayList.add(new Product((name[finalI].replace("$", "")), "₹" + price[finalI].replace("$", ""), quantity[finalI].replace("$", ""), q_type[finalI].replace("$", ""), id[finalI].replace("$", ""), null));
-                        productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
-                        recyclerViewProducts.setAdapter(productAdapter);
-                    }
+        for (int i = 0; i < id.length; i++) {
+            for (int j = 0; j < orderData.getProductArrayList().size(); j++) {
+                if (id[i].replace("$", "").equals(orderData.getProductArrayList().get(j).getId())) {
+                    productArrayList.add(new Product((name[i].replace("$", "")),
+                            "₹" + price[i].replace("$", ""),
+                            quantity[i].replace("$", ""),
+                            q_type[i].replace("$", ""),
+                            id[i].replace("$", ""),
+                            orderData.getProductArrayList().get(j).getImageUrl()));
+                } else {
 
                 }
-            });
 
+
+            }
 
         }
         textViewTotalItems.setText("Total Items: " + productArrayList.size());
-
+        productAdapter = new ProductAdapter(OrderDetails.this, productArrayList);
+        recyclerViewProducts.setAdapter(productAdapter);
         if (orderData.getStatus().equals("cancelled") || orderData.getStatus().equals("delivered")) {
             buttonLayout.setVisibility(View.GONE);
             customerDetailsLayout.setVisibility(View.GONE);

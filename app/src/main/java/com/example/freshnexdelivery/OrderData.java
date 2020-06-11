@@ -61,7 +61,12 @@ public class OrderData {
     @Expose
     private ArrayList<User> user;
 
-    public OrderData(String id, String oid, String uid, String pname, String pid, String ptype, String pprice, String ddate, String timesloat, String orderDate, String status, String qty, String total, String rate, String pMethod, String deliveryAgentId, String canceledByAgent, ArrayList<User> user) {
+    @SerializedName("product")
+    @Expose
+    private ArrayList<Product> productArrayList;
+
+    public OrderData(String id, String oid, String uid, String pname, String pid, String ptype, String pprice, String ddate, String timesloat, String orderDate, String status, String qty, String total, String rate, String pMethod, String deliveryAgentId, String canceledByAgent,
+                     ArrayList<User> user, ArrayList<Product> productArrayList) {
         this.id = id;
         this.oid = oid;
         this.uid = uid;
@@ -80,6 +85,32 @@ public class OrderData {
         this.deliveryAgentId = deliveryAgentId;
         this.canceledByAgent = canceledByAgent;
         this.user = user;
+        this.productArrayList = productArrayList;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderData{" +
+                "id='" + id + '\'' +
+                ", oid='" + oid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", pname='" + pname + '\'' +
+                ", pid='" + pid + '\'' +
+                ", ptype='" + ptype + '\'' +
+                ", pprice='" + pprice + '\'' +
+                ", ddate='" + ddate + '\'' +
+                ", timesloat='" + timesloat + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                ", status='" + status + '\'' +
+                ", qty='" + qty + '\'' +
+                ", total='" + total + '\'' +
+                ", rate='" + rate + '\'' +
+                ", pMethod='" + pMethod + '\'' +
+                ", deliveryAgentId='" + deliveryAgentId + '\'' +
+                ", canceledByAgent='" + canceledByAgent + '\'' +
+                ", user=" + user +
+                ", productArrayList=" + productArrayList +
+                '}';
     }
 
     public String getId() {
@@ -226,28 +257,11 @@ public class OrderData {
         this.user = user;
     }
 
+    public ArrayList<Product> getProductArrayList() {
+        return productArrayList;
+    }
 
-    @Override
-    public String toString() {
-        return "OrderData{" +
-                "id='" + id + '\'' +
-                ", oid='" + oid + '\'' +
-                ", uid='" + uid + '\'' +
-                ", pname='" + pname + '\'' +
-                ", pid='" + pid + '\'' +
-                ", ptype='" + ptype + '\'' +
-                ", pprice='" + pprice + '\'' +
-                ", ddate='" + ddate + '\'' +
-                ", timesloat='" + timesloat + '\'' +
-                ", orderDate='" + orderDate + '\'' +
-                ", status='" + status + '\'' +
-                ", qty='" + qty + '\'' +
-                ", total='" + total + '\'' +
-                ", rate='" + rate + '\'' +
-                ", pMethod='" + pMethod + '\'' +
-                ", deliveryAgentId='" + deliveryAgentId + '\'' +
-                ", canceledByAgent='" + canceledByAgent + '\'' +
-                ", user=" + user +
-                '}';
+    public void setProductArrayList(ArrayList<Product> productArrayList) {
+        this.productArrayList = productArrayList;
     }
 }

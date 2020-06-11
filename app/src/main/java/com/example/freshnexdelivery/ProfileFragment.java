@@ -2,6 +2,7 @@ package com.example.freshnexdelivery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ public class ProfileFragment extends Fragment {
     MaterialToolbar materialToolbar;
     Switch statusSwitch;
     API_Interface api_interface;
+    private static final String TAG = "ProfileFragment";
 
 
     @Override
@@ -114,17 +116,27 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        Glide.with(getContext()).load(Constant.Image_Base_URL  + preferences.getProfile()).thumbnail(Glide.with(getContext()).load(R.drawable.placeholder)).into(circleImageView);
+        Glide.with(getContext()).load(Constant.Image_Base_URL + preferences.getProfile()).thumbnail(Glide.with(getContext()).load(R.drawable.plroduct_place)).into(circleImageView);
 
 
         return view;
     }
 
-    public void changeAvailaibleStatus(String status) {
+    public void changeAvailaibleStatus(final String status) {
         api_interface = RetrofitClient.getClient().getApi();
         api_interface.changeStatus(preferences.getToken(), status).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+
+                if (status.equals("Available")) {
+                    statusSwitch.setChecked(true);
+                    preferences.setStatus(1);
+                } else {
+                    statusSwitch.setChecked(false);
+                    preferences.setStatus(0);
+                }
+
 
             }
 
