@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         LoadFragment(active);
         Log.d(TAG, "onCreate: " + preferences.getToken());
 
+//        new MaterialShowcaseView.Builder(this)
+//                .setTarget(bottomNavigationView.getMenu())
+//                .setDismissText("GOT IT")
+//                .setContentText("This is some amazing feature you should know about")
+//                // optional but starting animations immediately in onCreate can make them choppy
+//                .singleUse("0") // provide a unique ID used to ensure it is only shown once
+//                .show();
+
 
     }
 
@@ -115,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomSheetDialog.show();
+
 
     }
 }

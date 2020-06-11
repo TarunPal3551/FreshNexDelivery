@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -68,7 +69,7 @@ public class ProfileFragment extends Fragment {
         aadharTextView.setText("" + preferences.getAadharNumber());
         vehicalNumberTextView.setText("" + preferences.getVehicalNum());
         vehicalTypeTextView.setText("" + preferences.getVehicalType());
-        partnerIdTextView.setText("Partner Id " + preferences.getPartnerId());
+        partnerIdTextView.setText("Partner Id - " + preferences.getPartnerId());
         if (preferences.getStatus() > 0) {
             statusSwitch.setChecked(true);
         } else {
@@ -112,6 +113,10 @@ public class ProfileFragment extends Fragment {
                     });
                     bottomSheetDialog.show();
                 }
+                else if (item.getItemId() == R.id.support){
+                    sendTextMsgOnWhatsApp("+919831318180", "Hi Team - I need help regarding Application. Are your there?");
+
+                }
                 return false;
             }
         });
@@ -130,6 +135,34 @@ public class ProfileFragment extends Fragment {
         getOrderCount();
 
         return view;
+    }
+    public void sendTextMsgOnWhatsApp(String sContactNo, String sMessage) {
+        String toNumber = sContactNo; // contains spaces, i.e., example +91 98765 43210
+        toNumber = toNumber.replace("+", "").replace(" ", "");
+
+        /*this method contactIdByPhoneNumber() will get unique id for given contact,
+        if this return's null then it means that you don't have any contact save with this mobile no.*/
+
+
+
+
+        /*
+         * Once We get the contact id, we check whether contact has a registered with WhatsApp or not.
+         * this hasWhatsApp(hasWhatsApp) method will return null,
+         * if contact doesn't associate with whatsApp services.
+         * */
+        if (toNumber != null && toNumber.length() > 0) {
+            Intent sendIntent = new Intent("android.intent.action.MAIN");
+            sendIntent.putExtra("jid", toNumber + "@s.whatsapp.net");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, sMessage);
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.setPackage("com.whatsapp");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        } else {
+            // this contact does not exist in any WhatsApp application
+           // Toast.makeText(getContext(), "Contact not found in WhatsApp !!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void getOrderCount() {

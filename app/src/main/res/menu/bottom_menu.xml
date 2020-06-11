@@ -3,21 +3,20 @@
     <item
         android:id="@+id/pending"
         android:title="Pending"
-        android:icon="@drawable/ic_baseline_pending_board_24"
+        android:iconTint="#8E8E93"
+        android:icon="@drawable/ic_outline_assignment_24"
         >
-
     </item>
     <item
         android:id="@+id/delivered"
         android:title="Delivered"
-        android:icon="@drawable/ic_baseline_delivered_bus_24"
+        android:icon="@drawable/ic_outline_assignment_turned_in_24"
         >
-
     </item>
     <item
         android:id="@+id/notification"
         android:title="Guideline"
-        android:icon="@drawable/ic_baseline_help_outline_24"
+        android:icon="@drawable/ic_outline_ballot_24"
         >
 
     </item>

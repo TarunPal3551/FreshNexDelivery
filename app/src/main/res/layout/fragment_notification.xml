@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
-
+            app:menu="@menu/guide_menu"
             app:title="Guidelines"
             app:titleTextColor="@android:color/white">
 
